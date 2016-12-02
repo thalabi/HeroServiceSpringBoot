@@ -1,0 +1,55 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+	<!-- Sequences -->
+    <changeSet author="thalabi" id="1">
+		<comment>hero_seq</comment>
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" ordered="false" sequenceName="hero_seq" startValue="6"/>
+    </changeSet>
+
+	<!-- Tables -->
+    <changeSet author="thalabi" id="2">
+        <createTable tableName="hero">
+            <column name="id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+	<!-- Primary keys -->
+    <changeSet author="thalabi" id="3">
+        <addPrimaryKey columnNames="id" constraintName="hero_pk" tableName="hero"/>
+    </changeSet>
+
+	<!-- Indexes -->
+    <changeSet author="thalabi" id="4">
+        <addUniqueConstraint columnNames="name" constraintName="hero_unique_1" tableName="hero"/>
+    </changeSet>
+
+	<!-- Data -->
+    <changeSet author="thalabi" id="5">
+		<sql>
+		
+INSERT INTO HERO.HERO(ID, NAME, VERSION) VALUES 
+(1, 'Charles Lindburg', 0), 
+(2, 'Omar Bin Khattab', 0), 
+(3, 'Kelly Johnson', 0), 
+(4, 'Chuck Yeager', 0), 
+(5, 'Hamza', 0);
+
+		</sql>
+		<rollback>
+			<sql>
+delete from hero;
+			</sql>
+		</rollback>
+	</changeSet>
+
+</databaseChangeLog>
+    
