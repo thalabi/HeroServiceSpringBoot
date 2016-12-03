@@ -37,6 +37,23 @@
   	<dependency>
   		<groupId>org.springframework.boot</groupId>
   		<artifactId>spring-boot-starter-jersey</artifactId>
+  		<exclusions>
+  			<exclusion>
+  				<groupId>org.springframework.boot</groupId>
+  				<artifactId>spring-boot-starter-tomcat</artifactId>
+  			</exclusion>
+  		</exclusions>
   	</dependency>
   </dependencies>
+  
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+  
+  
 </project>
